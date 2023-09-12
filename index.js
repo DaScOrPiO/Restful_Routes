@@ -39,7 +39,6 @@ const validateRoutes = (req, res, next) => {
   // if error exists
   if (item_to_validate.error) {
     const message = item_to_validate.error.details.map((el) => el.message);
-    console.log(message);
     throw new App_error(message, 400);
   } else {
     next();
@@ -52,12 +51,16 @@ app.post("/api", validateRoutes, async (req, res, next) => {
     const { name } = req.body;
     const findPerson = await Person.findOne({ name: name });
     if (findPerson) {
-      res.status(200).json("Person already exists");
+      res.status(409).json("Person already exists");
     } else {
       const newPerson = new Person({ name: name });
       console.log(newPerson);
       await newPerson.save();
-      res.status(200).json(newPerson);
+      res
+        .status(200)
+        .json(
+          `Action Successful ${newPerson.name} was added! id is ${newPerson.id}`
+        );
     }
   } catch (err) {
     next();
@@ -68,10 +71,17 @@ app.post("/api", validateRoutes, async (req, res, next) => {
 app.get("/api/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const foundPerson = await Person.findById(id);
-    if (!foundPerson) {
-      res.status(404).send("Person not found");
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new App_error("Invalid ID format!", 400);
     }
+
+    const foundPerson = await Person.findById(id);
+
+    if (!foundPerson) {
+      throw new App_error("Person not found", 404);
+    }
+
     res.json(foundPerson);
   } catch (err) {
     next(err);
@@ -83,15 +93,25 @@ app.patch("/api/:id", validateRoutes, async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
-    const updateItem = await Person.findByIdAndUpdate(
-      id,
-      { name: name },
-      { new: true }
-    );
-    console.log(name);
-    res.status(200).json(updateItem);
+
+    // Validate if id is a valid mongoose id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new App_error("Invalid ID format!", 400);
+    }
+
+    // Checks if a person exists in database and update or throw error
+    const item = await Person.findById(id);
+    if (!item) {
+      throw new App_error("Person not found!", 404);
+    } else {
+      const updateItem = await Person.findByIdAndUpdate(
+        id,
+        { name: name },
+        { new: true }
+      );
+      res.status(200).json(`Action Successful`);
+    }
   } catch (err) {
-    res.send(err);
     next(err);
   }
 });
@@ -100,8 +120,20 @@ app.patch("/api/:id", validateRoutes, async (req, res, next) => {
 app.delete("/api/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedItem = await Person.findByIdAndDelete(id);
-    res.status(200).json(deletedItem);
+
+    // Validate if id is a valid mongoose id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new App_error("Invalid ID format!", 400);
+    }
+
+    // Checks if a person exists in database and update or throw error
+    const item = await Person.findById(id);
+    if (!item) {
+      throw new App_error("Person not found!", 404);
+    } else {
+      const deletedItem = await Person.findByIdAndDelete(id);
+      res.status(200).json(`Sucessfully deleted ${deletedItem.name}`);
+    }
   } catch (err) {
     next(err);
   }
@@ -111,5 +143,4 @@ app.delete("/api/:id", async (req, res, next) => {
 app.use((err, req, res, next) => {
   const { message = "Something went wrong", code = 500 } = err;
   res.status(code).json(message);
-  console.log(code, message, err);
 });
