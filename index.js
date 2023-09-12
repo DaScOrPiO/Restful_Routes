@@ -10,7 +10,7 @@ const App_error = require("./App_error");
 const main = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://dunni82:pX8W7q5VfQ9ue4l9@cluster0.agelotm.mongodb.net/"
+      "mongodb+srv://dunni82:pX8W7q5VfQ9ue4l9@cluster0.agelotm.mongodb.net/crud"
     );
     console.log("mongoose connection success");
   } catch (err) {
