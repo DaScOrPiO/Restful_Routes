@@ -33,7 +33,7 @@ Checks if a person exists in the database before updating, if the id doesn't exi
 Delete existing user data: copy https://myrestfulroutes.onrender.com/api/id and make a **DELETE** request via postman or any other endpoint testing tool of your choice
 
 ### How it works
-Checks if a person exists in the database before deleting, if the id doesn't exist in the database, an error with code 400 is thrown saying `Person not found!`.
+Checks if a person exists in the database before deleting, if the id doesn't exist in the database, an error with code 404 is thrown saying `Person not found!`.
 
 **NOTE:** `id in this case is a unique identifier for saved data. for testing pusposes, first create a new user by sending a post request to https://myrestfulroutes.onrender.com/api, copy the id value returned in the request response and use for other operations`
 
