@@ -9,7 +9,9 @@ const App_error = require("./App_error");
 // Connect mongoose with database
 const main = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/crud");
+    await mongoose.connect(
+      "mongodb+srv://dunni82:pX8W7q5VfQ9ue4l9@cluster0.agelotm.mongodb.net/"
+    );
     console.log("mongoose connection success");
   } catch (err) {
     console.log(err);
@@ -89,7 +91,7 @@ app.get("/api/:id", async (req, res, next) => {
 });
 
 // Update Person
-app.patch("/api/:id", validateRoutes, async (req, res, next) => {
+app.put("/api/:id", validateRoutes, async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
@@ -132,7 +134,7 @@ app.delete("/api/:id", async (req, res, next) => {
       throw new App_error("Person not found!", 404);
     } else {
       const deletedItem = await Person.findByIdAndDelete(id);
-      res.status(200).json(`Sucessfully deleted ${deletedItem.name}`);
+      res.status(204).json(`Sucessfully deleted ${deletedItem.name}`);
     }
   } catch (err) {
     next(err);
