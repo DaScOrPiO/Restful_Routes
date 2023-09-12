@@ -74,10 +74,12 @@ app.get("/api/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
 
+    // Validates if id is valid mongoose id
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new App_error("Invalid ID format!", 400);
     }
 
+    // checks if a person exists
     const foundPerson = await Person.findById(id);
 
     if (!foundPerson) {
