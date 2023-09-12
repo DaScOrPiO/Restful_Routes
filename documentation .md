@@ -5,7 +5,7 @@
 
 2. **Installing Dependencies:** Go into the root folder Example: `cd Restful_routes` then run `npm install` or `yarn install` and wait for dependencies to intall.
 
-3. **New Branch:** create a new branch run: `git checkout -b *branch name*` make changes and publish branch `git push -u origin *branch name*`
+3. **New Branch:** create a new branch run: `git checkout -b *branch name*` make changes and publish branch `git push origin -u *branch name*`
 
 4. **Run Locally:** Once done with step two above, run `node index.js` or `nodemon index.js` if you have `nodemon` installed.
 
@@ -27,7 +27,7 @@ If a user exists, it returns a response code 200 format along with details regar
 Copy https://myrestfulroutes.onrender.com/api/id and make a **PUT** request via postman or any other endpoint testing tool of your choice.
 
 ### How it works
-Checks if a person exists in the database before updating, if the id doesn't exist in the database, an error with code 400 is thrown saying `Person not found!`.
+Checks if a person exists in the database before updating, if the id doesn't exist in the database, an error with code 404 is thrown saying `Person not found!`.
 
 4. ### Delete existing user: 
 Delete existing user data: copy https://myrestfulroutes.onrender.com/api/id and make a **DELETE** request via postman or any other endpoint testing tool of your choice
