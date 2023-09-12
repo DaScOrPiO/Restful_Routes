@@ -5,7 +5,9 @@
 
 2. **Installing Dependencies:** Go into the root folder Example: `cd Restful_routes` then run `npm install` or `yarn install` and wait for dependencies to intall.
 
-3. **Run Locally:** Once done with step two above, run `node index.js` or `nodemon index.js` if you have `nodemon` installed.
+3. **New Branch:** create a new branch run: `git checkout -b *branch name*` make changes and publish branch `git push -u origin *branch name*`
+
+4. **Run Locally:** Once done with step two above, run `node index.js` or `nodemon index.js` if you have `nodemon` installed.
 
 ## Endpoint usage and responses
 
@@ -35,8 +37,8 @@ Checks if a person exists in the database before deleting, if the id doesn't exi
 **NOTE:** `id in this case is a unique identifier for saved data. for testing pusposes, first create a new user by sending a post request to https://example.com/api/id, copy the id value returned in the request response and use for other operations`
 
 ### Responses Sent:
-**Response 409 (Conflict):** This error is thrown if a user already exists
-**Response 404 (Not Found):** This error is thrown when query data isn't found in database
-**Response 400 (Bad Request)** Thrown for bad requests *scenerio*: `if the name parameter is not included with a post request or an ID is found to be invalid`
-**Response 200:** Sent when all expected parameters are received
-**Response 500:** Sent when there's a server error
+1. **Response 409 (Conflict):** This error is thrown if a user already exists
+2. **Response 404 (Not Found):** This error is thrown when query data isn't found in database
+3. **Response 400 (Bad Request)** Thrown for bad requests *scenerio*: `if the name parameter is not included with a post request or an ID is found to be invalid`
+4. **Response 200:** Sent when all expected parameters are received
+5. **Response 500:** Sent when there's a server error
