@@ -136,7 +136,7 @@ app.delete("/api/:id", async (req, res, next) => {
       throw new App_error("Person not found!", 404);
     } else {
       const deletedItem = await Person.findByIdAndDelete(id);
-      res.status(204);
+      res.status(204).send("Action sucessful");
     }
   } catch (err) {
     next(err);
