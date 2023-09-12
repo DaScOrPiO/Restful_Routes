@@ -61,7 +61,7 @@ app.post("/api", validateRoutes, async (req, res, next) => {
       res
         .status(200)
         .json(
-          `Action Successful ${newPerson.name} was added! id is ${newPerson.id}`
+          `Action Successful, user's id is ${newPerson.id}`
         );
     }
   } catch (err) {
