@@ -1,7 +1,8 @@
-# Endpoint Detailed documentation
-
+# Endpoint Documentation
+## Description
+Restful_routes is an api endpoint created to perform crud operation on a person/user.
 ## Environment Setup:
-1. **Clone the repo:** on your terminal, cd into a directory of choice and run `git clone https://github.com/DaScOrPiO/Restful_routes.git`
+1. **Clone the repo:** fork the repo and on your terminal, cd into a directory of choice and run `git clone https://github.com/DaScOrPiO/Restful_routes.git`
 
 2. **Installing Dependencies:** Go into the root folder Example: `cd Restful_routes` then run `npm install` or `yarn install` and wait for dependencies to intall.
 
@@ -30,7 +31,7 @@ Copy https://myrestfulroutes.onrender.com/api/id and make a **PUT** request via 
 Checks if a person exists in the database before updating, if the id doesn't exist in the database, an error with code 404 is thrown saying `Person not found!`.
 
 4. ### Delete existing user: 
-Delete existing user data: copy https://myrestfulroutes.onrender.com/api/id and make a **DELETE** request via postman or any other endpoint testing tool of your choice
+Delete existing user data: copy https://myrestfulroutes.onrender.com/api/id and make a **DELETE** request via postman or any other endpoint testing tool of your choice.
 
 ### How it works
 Checks if a person exists in the database before deleting, if the id doesn't exist in the database, an error with code 404 is thrown saying `Person not found!`. Otherwise, a response with code 204 is sent.
@@ -38,8 +39,8 @@ Checks if a person exists in the database before deleting, if the id doesn't exi
 **NOTE:** `id in this case is a unique identifier for saved data. for testing pusposes, first create a new user by sending a post request to https://myrestfulroutes.onrender.com/api, copy the id value returned in the request response and use for other operations`
 
 ### Responses Sent:
-1. **Response 409 (Conflict):** This error is thrown if a user already exists
-2. **Response 404 (Not Found):** This error is thrown when query data isn't found in database
+1. **Response 409 (Conflict):** This error is thrown if a user already exists.
+2. **Response 404 (Not Found):** This error is thrown when query data isn't found in database.
 3. **Response 400 (Bad Request)** Thrown for bad requests *scenerio*: `if the name parameter is not included with a post request or an ID is found to be invalid`
-4. **Response 200:** Sent when all expected parameters are received
-5. **Response 500:** Sent when there's a server error
+4. **Response 200:** Sent when all expected parameters are received.
+5. **Response 500:** Sent when there's a server error.
